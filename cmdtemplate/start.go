@@ -7,6 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/wianvos/xlr"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 var startLong = `Start a release of of a template in the system
@@ -46,7 +47,7 @@ func addStart() {
 //runCreate runs the actual create command
 func runStart(cmd *cobra.Command, args []string) {
 
-	var release xlr.Release
+	var release template.Template
 	var err error
 	// setup the client connection
 	config := getConfig()

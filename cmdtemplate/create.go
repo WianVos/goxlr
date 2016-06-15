@@ -9,6 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/wianvos/xlr"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 var createLong = `Return a list of templates in the system
@@ -70,7 +71,7 @@ func runCreate(cmd *cobra.Command, args []string) {
 
 }
 
-func readJSONFile(f string) (template xlr.Template) {
+func readJSONFile(f string) (template template.Template) {
 
 	file, e := ioutil.ReadFile(f)
 

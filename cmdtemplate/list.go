@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/wianvos/xlr"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 var listLong = `Return a list of templates in the system
@@ -50,7 +51,7 @@ func addList() {
 func runList(cmd *cobra.Command, args []string) {
 	//declare function variables
 	// output will hold the output ... haha u guessed it
-	var output []listOutput
+	var output []string
 
 	//get the much needed config for the xlr client
 	config := getConfig()
@@ -69,35 +70,27 @@ func runList(cmd *cobra.Command, args []string) {
 
 	// format the output according to the flags
 	switch flagLong {
-	default:
+	case false:
 		for _, t := range templates {
-			l := listOutputShort{Title: t.Title, ID: t.ID}
-			output = append(output, l)
+			output = append(output, t.RenderJSONShort())
 		}
 	case true:
 		for _, t := range templates {
-			l := listOutputLong{
-				listOutputShort: listOutputShort{
-					Title: t.Title,
-					ID:    t.ID},
-				Description: t.Description}
-			output = append(output, l)
+			output = append(output, template.RenderJSON(t))
 		}
 	}
 
-	var outputString string
 	//render
-	if flagJSON {
-		outputString = renderJSON(output)
-	} else {
-		for _, s := range output {
-			outputString = outputString + s.render()
-		}
-	}
 
 	if flagOutFile == "" {
-		fmt.Printf(outputString)
+		for _, s := range output {
+			fmt.Println(s)
+		}
 	} else {
+		var outputString string
+		for _, s := range output {
+			outputString = outputString + "\n" + s
+		}
 		writeToFile(outputString, flagOutFile)
 	}
 

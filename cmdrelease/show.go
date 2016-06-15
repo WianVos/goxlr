@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 var showLong = `Show details on a certain release
@@ -52,6 +53,6 @@ func runShow(cmd *cobra.Command, args []string) {
 	if flagShort == true {
 		fmt.Println(release.RenderJSONShort())
 	} else {
-		fmt.Println(release.RenderJSON())
+		fmt.Println(template.RenderJSON(release))
 	}
 }

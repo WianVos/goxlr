@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/wianvos/xlr"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 var listLong = `Return a list of releases in the system
@@ -29,7 +30,7 @@ func runList(cmd *cobra.Command, args []string) {
 
 	validateStatusFlag(flagStatus)
 
-	var newreleases []xlr.Release
+	var newreleases template.Templates
 
 	//get the much needed config for the xlr client
 	config := getConfig()
@@ -48,7 +49,7 @@ func runList(cmd *cobra.Command, args []string) {
 	//the rest interface should not only render all releases but should also return all templates as well
 	//so we need to deal with that as always ... thnx guys ..
 	for _, r := range releases {
-		if r.OriginTemplateId != "" {
+		if r.OriginTemplateID != "" {
 			if flagStatus != "" {
 				if r.Status == flagStatus {
 					newreleases = append(newreleases, r)
@@ -66,7 +67,7 @@ func runList(cmd *cobra.Command, args []string) {
 	switch flagLong {
 	case true:
 		for _, r := range releases {
-			fmt.Println(r.RenderJSON())
+			fmt.Println(template.RenderJSON(r))
 		}
 	case false:
 		for _, r := range releases {

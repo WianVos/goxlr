@@ -7,6 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/wianvos/xlr"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 // define constants
@@ -46,8 +47,7 @@ func runShow(cmd *cobra.Command, args []string) {
 	}
 
 	// declare variables
-	var outputString string
-	var template xlr.Template
+	var t template.Template
 	var err error
 
 	//get the much needed config for the xlr client
@@ -63,7 +63,7 @@ func runShow(cmd *cobra.Command, args []string) {
 	if flagSearchByTitle == true {
 		applicationName := strings.Join(args, " ")
 
-		template, err = client.Templates.GetByTitle(applicationName)
+		t, err = client.Templates.GetByTitle(applicationName)
 
 		if err != nil {
 			panic(fmt.Errorf("goxlr: there was an error trying to retrieve: %s : %s", applicationName, err))
@@ -78,23 +78,17 @@ func runShow(cmd *cobra.Command, args []string) {
 		}
 
 		// query for a full list of the available templates
-		template, err = client.Templates.Get(applicationID)
+		t, err = client.Templates.Get(applicationID)
 
 		if err != nil {
 			panic(fmt.Errorf("goxlr: there was an error trying to retrieve: %s : %s", applicationID, err))
 		}
 	}
 
-	if flagJSON == true {
-		outputString = renderJSON(template)
-	} else {
-		outputString = fmt.Sprintf("%+v", template)
-	}
-
 	if flagOutFile == "" {
-		fmt.Println(outputString)
+		fmt.Println(template.RenderJSON(t))
 	} else {
-		writeToFile(outputString, flagOutFile)
+		writeToFile(template.RenderJSON(t), flagOutFile)
 	}
 
 }

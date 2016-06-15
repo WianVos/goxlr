@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/wianvos/xlr"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 var monitorLong = `Monitors running releases in the system
@@ -39,8 +40,7 @@ func runMonitor(cmd *cobra.Command, args []string) {
 	client := xlr.NewClient(config)
 
 	for {
-		var releases xlr.Releases
-		var newreleases xlr.Releases
+		var releases template.Templates
 		var err error
 		// query for a full list of the available releases
 		releases, err = client.Releases.List()
@@ -49,21 +49,8 @@ func runMonitor(cmd *cobra.Command, args []string) {
 			panic(fmt.Errorf("Unable to retrieve releases: %s \n", err))
 		}
 
-		//for some stupid reason our briljant developers have decided that quering
-		//the rest interface should not only render all releases but should also return all templates as well
-		//so we need to deal with that as always ... thnx guys ..
-		for _, r := range releases {
-			if r.OriginTemplateId != "" {
-				if flagStatus != "" {
-					if r.Status == flagStatus {
-						newreleases = append(newreleases, r)
-					}
-				} else {
-					newreleases = append(newreleases, r)
-				}
-			}
-		}
-		releases = newreleases
+		// seperate releases from the templates
+		releases.GetReleases()
 		//totally avoidable
 		releases.SortByStatus()
 		// check if we need to come up with a long or a short answer
@@ -71,7 +58,7 @@ func runMonitor(cmd *cobra.Command, args []string) {
 		switch flagLong {
 		case true:
 			for _, r := range releases {
-				fmt.Println(r.RenderJSON())
+				fmt.Println(template.RenderJSON(r))
 			}
 		case false:
 			for _, r := range releases {

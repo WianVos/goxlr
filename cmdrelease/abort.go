@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/wianvos/xlr/datamodels/template"
 )
 
 var abortLong = `abort a certain release
@@ -51,6 +52,6 @@ func runAbort(cmd *cobra.Command, args []string) {
 	if flagShort == true {
 		fmt.Println(release.RenderJSONShort())
 	} else {
-		fmt.Println(release.RenderJSON())
+		fmt.Println(template.RenderJSON(release))
 	}
 }
