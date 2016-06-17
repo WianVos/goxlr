@@ -13,6 +13,12 @@ import (
 var flagLong bool
 var flagJSON bool
 var flagOutFile string
+var flagSearchByTitle bool
+
+//constants
+const (
+	IDPrefix = "Applications"
+)
 
 // maskCmd represents the parent for all mask cli commands.
 var relCmd = &cobra.Command{
@@ -28,6 +34,7 @@ func GetCommands() *cobra.Command {
 	addShow()
 	addCreate()
 	addStart()
+	addDelete()
 	return relCmd
 }
 
@@ -62,4 +69,15 @@ func getConfig() *xlr.Config {
 	}
 
 	return config
+}
+
+func getClient() *xlr.Client {
+	//get the much needed config for the xlr client
+	config := getConfig()
+
+	// instantiate the xlr client
+	client := xlr.NewClient(config)
+
+	return client
+
 }

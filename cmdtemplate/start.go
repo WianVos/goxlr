@@ -72,21 +72,18 @@ func runStart(cmd *cobra.Command, args []string) {
 
 	// start the releases
 	if flagSchedule != true {
-		fmt.Println("run")
-		release, err = client.Templates.Start(templateID, flagReleaseTitle, fv, fpv)
+		release, err = client.Templates.StartRelease(templateID, flagReleaseTitle, fv, fpv)
 		if err != nil {
-			fmt.Println(err)
 		}
 	} else {
-		fmt.Println("schedule")
-
-		release, err = client.Templates.Create(templateID, flagReleaseTitle, fv, fpv)
+		release, err = client.Templates.CreateRelease(templateID, flagReleaseTitle, fv, fpv)
 		if err != nil {
 			fmt.Println(err)
 		}
 	}
 
 	fmt.Println(release.RenderJSONShort())
+	os.Exit(0)
 
 }
 

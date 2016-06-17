@@ -10,17 +10,10 @@ import (
 	"github.com/wianvos/xlr/datamodels/template"
 )
 
-// define constants
-const (
-	IDPrefix = "Applications"
-)
-
 var showLong = `Show details on a certain template
 Example:
   template show templateID
 `
-
-var flagSearchByTitle bool
 
 // flag variables
 
@@ -66,7 +59,8 @@ func runShow(cmd *cobra.Command, args []string) {
 		t, err = client.Templates.GetByTitle(applicationName)
 
 		if err != nil {
-			panic(fmt.Errorf("goxlr: there was an error trying to retrieve: %s : %s", applicationName, err))
+			fmt.Println(fmt.Errorf("goxlr: there was an error trying to retrieve: %s : %s", applicationName, err))
+			os.Exit(1)
 		}
 
 	} else {
@@ -86,7 +80,11 @@ func runShow(cmd *cobra.Command, args []string) {
 	}
 
 	if flagOutFile == "" {
-		fmt.Println(template.RenderJSON(t))
+		if flagLong == false {
+			fmt.Println(t.RenderJSONShort())
+		} else {
+			fmt.Println(template.RenderJSON(t))
+		}
 	} else {
 		writeToFile(template.RenderJSON(t), flagOutFile)
 	}

@@ -1,0 +1,112 @@
+{
+      "id": "Applications\/Template12345",
+      "type": "xlrelease.Release",
+      "title": "test template",
+      "flagStatus": "OK",
+"phases": [
+        {
+          "id": "Applications\/Template12345\/Phase8710920",
+          "type": "xlrelease.Phase",
+          "title": "Phase",
+          "flagStatus": "OK",
+          "tasks": [
+            {
+              "id": "Applications\/Template12345\/Phase8710920\/Task6323343",
+              "type": "xlrelease.DeployitTask",
+              "title": "Deploy me",
+              "flagStatus": "OK",
+              "container": "Applications\/Template12345\/Phase8710920",
+              "status": "PLANNED",
+              "comments": [],
+              "overdueNotified": false,
+              "currentStep": 0,
+              "totalStep": 0,
+              "password": "{b64}36JG6T6bN08tmZZLm5iScA==",
+              "username": "admin"
+            },
+{
+
+              "id": "Applications\/Template12345\/Phase8710920\/Task6323343",
+              "type": "xlrelease.DeployitTask",
+              "title": "Deploy me",
+              "flagStatus": "OK",
+              "container": "Applications\/Template12345\/Phase8710920",
+              "status": "PLANNED",
+              "comments": [],
+              "overdueNotified": false,
+              "currentStep": 0,
+              "totalStep": 0,
+              "password": "{b64}36JG6T6bN08tmZZLm5iScA==",
+              "username": "admin"
+            }
+          ],
+
+
+          "status": "PLANNED",
+          "color": "#009CDB",
+          "release": "Applications\/Template12345"
+        },
+        {
+                  "id": "Applications\/Template12345\/Phase8710920",
+                  "type": "xlrelease.Phase",
+                  "title": "Phase",
+                  "flagStatus": "OK",
+                  "tasks": [
+                    {
+                      "id": "Applications\/Template12345\/Phase8710920\/Task6323343",
+                      "type": "xlrelease.DeployitTask",
+                      "title": "Deploy me",
+                      "flagStatus": "OK",
+                      "container": "Applications\/Template12345\/Phase8710920",
+                      "status": "PLANNED",
+                      "comments": [],
+                      "overdueNotified": false,
+                      "currentStep": 0,
+                      "totalStep": 0,
+                      "password": "{b64}36JG6T6bN08tmZZLm5iScA==",
+                      "username": "admin"
+                    },
+        {
+
+                      "id": "Applications\/Template12345\/Phase8710920\/Task6323343",
+                      "type": "xlrelease.DeployitTask",
+                      "title": "Deploy me",
+                      "flagStatus": "OK",
+                      "container": "Applications\/Template12345\/Phase8710920",
+                      "status": "PLANNED",
+                      "comments": [],
+                      "overdueNotified": false,
+                      "currentStep": 0,
+                      "totalStep": 0,
+                      "password": "{b64}36JG6T6bN08tmZZLm5iScA==",
+                      "username": "admin"
+                    }
+                  ],
+                  "status": "PLANNED",
+                  "color": "#009CDB",
+                  "release": "Applications\/Template12345"
+                }
+      ],
+      "teams": [
+        {
+          "id": "Applications\/Template12345\/Team9468521",
+          "type": "xlrelease.Team",
+          "teamName": "Template Owner",
+          "members": ["admin"],
+          "roles": [],
+          "permissions": ["template#create_release", "template#view", "template#edit"]
+        },
+        {
+          "id": "Applications\/Template12345\/Team9820252",
+          "type": "xlrelease.Team",
+          "teamName": "Release Admin",
+          "members": [],
+          "roles": [],
+          "permissions": ["release#view", "release#edit", "release#start", "release#abort", "release#edit_task", "release#reassign_task"]
+        }
+      ],
+      "variableValues": {},
+      "status": "TEMPLATE",
+      "tags": [],
+      "calendarPublished": false
+    }

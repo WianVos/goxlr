@@ -71,7 +71,9 @@ func runCreate(cmd *cobra.Command, args []string) {
 
 }
 
-func readJSONFile(f string) (template template.Template) {
+func readJSONFile(f string) template.Template {
+
+	var template template.Template
 
 	file, e := ioutil.ReadFile(f)
 
