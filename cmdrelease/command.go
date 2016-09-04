@@ -29,24 +29,8 @@ var relCmd = &cobra.Command{
 func GetCommands() *cobra.Command {
 
 	//collect the commands in the package
-	addList()
-	addShow()
-	addMonitor()
-	addAbort()
+
 	return relCmd
-}
-
-func getConfig() *xlr.Config {
-
-	return &xlr.Config{
-		User:     viper.GetString("user"),
-		Password: viper.GetString("password"),
-		Host:     viper.GetString("host"),
-		Port:     viper.GetString("port"),
-		Context:  viper.GetString("context"),
-		Scheme:   viper.GetString("scheme"),
-	}
-
 }
 
 func renderJSON(l interface{}) string {
@@ -91,7 +75,14 @@ func validateStatusFlag(s string) bool {
 
 func getClient() *xlr.Client {
 	//get the much needed config for the xlr client
-	config := getConfig()
+	config := &xlr.Config{
+		User:     viper.GetString("user"),
+		Password: viper.GetString("password"),
+		Host:     viper.GetString("host"),
+		Port:     viper.GetString("port"),
+		Context:  viper.GetString("context"),
+		Scheme:   viper.GetString("scheme"),
+	}
 
 	// instantiate the xlr client
 	client := xlr.NewClient(config)

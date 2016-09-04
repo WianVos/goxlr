@@ -1,7 +1,7 @@
 {
       "id": "Applications\/Template12345",
       "type": "xlrelease.Release",
-      "title": "test template",
+      "title": "test_template",
       "flagStatus": "OK",
 "phases": [
         {
